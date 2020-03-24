@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import News, ImageModel
+from .models import News, ImageModel, FeedFile, Contest
 
 
 class NewsSerializer(serializers.ModelSerializer):
@@ -7,12 +7,23 @@ class NewsSerializer(serializers.ModelSerializer):
         model = News
         fields = '__all__'
 
+
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageModel
         fields = '__all__'
 
-#
+
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedFile
+        fields = '__all__'
+
+class ConrestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contest
+        fields = '__all__'
+
 #
 # from probably.obtain.models import FileUpload
 #
