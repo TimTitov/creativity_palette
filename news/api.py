@@ -1,27 +1,19 @@
-from .models import ImageModel, FeedFile, Contest
+from .models import ClassImage, ClassNews
 from rest_framework import viewsets, permissions
-from .serializers import ImageSerializer, FileSerializer, ConrestSerializer
+from .serializers import ImageSerializer, NewsSerializer
 
 
-class TestViewSet(viewsets.ModelViewSet):
-    queryset = ImageModel.objects.all()
+class ImageAPI(viewsets.ModelViewSet):
+    queryset = ClassImage.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = ImageSerializer
 
 
-class FileAPIViewSet(viewsets.ModelViewSet):
-    queryset = FeedFile.objects.all()
+class NewsAPI(viewsets.ModelViewSet):
+    queryset = ClassNews.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = FileSerializer
-
-
-class ContestAPIViewSet(viewsets.ModelViewSet):
-    queryset = Contest.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = ConrestSerializer
+    serializer_class = NewsSerializer
