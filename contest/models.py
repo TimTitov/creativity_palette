@@ -2,12 +2,13 @@ from django.db import models
 
 
 class ClassContest(models.Model):
-    сontest_title = models.CharField(max_length=100)
-    сontest_date = models.DateTimeField()
-    сontest_image = models.TextField(blank=True, null=True)
-    сontest_text = models.TextField()
+    contest_title = models.CharField(max_length=100)
 
-    def сontest_files(self):
+    contest_date = models.DateTimeField()
+    contest_image = models.TextField(blank=True, null=True)
+    contest_text = models.TextField()
+
+    def contest_files(self):
         list = [{i.file} for i in ClassFile.objects.filter(feed=self)]
         return list
 
