@@ -1,6 +1,6 @@
 from .models import ClassFile, ClassContest
 from rest_framework import viewsets, permissions
-from .serializers import ConrestSerializer, FileSerializer
+from .serializers import ContestSerializer, FileSerializer
 
 
 class FileAPI(viewsets.ModelViewSet):
@@ -16,4 +16,4 @@ class ContestAPI(viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = ConrestSerializer
+    serializer_class = ContestSerializer

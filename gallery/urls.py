@@ -10,15 +10,4 @@ router = routers.DefaultRouter()
 
 router.register('api/gallery', GalleryAPI, 'gallery')
 
-urlpatterns = [
-    # path('add/', add_in_gallery),
-    # path('add/', add_in_gallery),
-    # path('add/', add_news),
-    # path('image/all/', get_all_image),
-    # path('contest/all/', get_all_contest),
-    # path('contest/get/', get_contest),
-    # path('get_file/', get_file),
-]
-# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += router.urls
-
+urlpatterns = router.urls
