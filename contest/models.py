@@ -15,6 +15,7 @@ class ClassContest(models.Model):
         verbose_name = 'Contest'
         verbose_name_plural = 'Contests'
 
+
 class ClassFile(models.Model):
     file = models.FileField(upload_to="files/%Y/%m/%d")
     feed = models.ForeignKey(ClassContest, on_delete=models.CASCADE)

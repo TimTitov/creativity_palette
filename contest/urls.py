@@ -15,6 +15,7 @@ urlpatterns = [
 
     path('contest/all/', get_all_contest),
     path('contest/get/', get_contest),
+    path('contest/add/', add_contest),
     path('get_file/', get_file),
 
 

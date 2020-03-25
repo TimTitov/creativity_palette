@@ -41,27 +41,16 @@ def get_file(request):
         serializer =FileSerializer(f, many=True)
         return Response(serializer.data)
 
-# @api_view(['POST'])
-# def add_news(request):
-#     if request.method == 'POST':
-#
-#         serializer = FileSerializer(data=request.data)
-#         id = int(request.GET.get("id"))
-#         print([i.file for i in FeedFile.objects.filter(feed=id)])
-#
-#         f = FeedFile.objects.filter(feed=id)
-#
-#
-#         serializer =FileSerializer(f, many=True)
-#         return Response(serializer.data)
-#
-# @api_view(['POST'])
-# def add_news(request):
-#     if request.method == 'POST':
-#         serializer = NewsSerializer(data=request.data)
-#
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def add_contest(request):
+    if request.method == 'POST':
+        try:
+            serializer = ConrestSerializer(data=request.data)
+        except ClassContest.BadRequest:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
