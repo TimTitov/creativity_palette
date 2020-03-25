@@ -8,7 +8,7 @@ class FileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ConrestSerializer(serializers.ModelSerializer):
+class ContestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassContest
         fields = '__all__'
