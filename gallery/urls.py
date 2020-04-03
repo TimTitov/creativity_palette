@@ -10,4 +10,8 @@ router = routers.DefaultRouter()
 
 router.register('api/gallery', GalleryAPI, 'gallery')
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('gallery_detail/', gallery_detail),
+    path('gallery_detail/<int:pk>', gallery_detail),
+]
+urlpatterns += router.urls

@@ -5,17 +5,6 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 
-@api_view(['GET'])
-def get_all_news(request):
-    if request.method == 'GET':
-        try:
-            news = ClassNews.objects.all()
-        except ClassNews.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = NewsSerializer(news, many=True)
-        return Response(serializer.data)
-
-
 @api_view(['POST'])
 def add_news(request):
     if request.method == 'POST':
@@ -32,27 +21,45 @@ def add_news(request):
 
 @api_view(['GET'])
 def get_all_image(request):
-    # try:
-    #     news = News.objects.all()
-    # except News.DoesNotExist:
-    #     return Response(status=status.HTTP_404_NOT_FOUND)
-
     if request.method == 'GET':
-        image = ClassImage.objects.all()
+        try:
+            image = ClassImage.objects.all()
+        except ClassImage.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ImageSerializer(image, many=True)
         return Response(serializer.data)
 
 
+@api_view(['GET'])
+def get_all_news(request):
+    if request.method == 'GET':
+        try:
+            news = ClassNews.objects.all()
+        except ClassNews.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = NewsSerializer(news, many=True)
+        return Response(serializer.data)
 
-@api_view(['POST'])
-def add_news(request):
-    if request.method == 'POST':
-        serializer = NewsSerializer(data=request.data)
 
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def news_detail(request, pk):
+    try:
+        news = ClassNews.objects.get(pk=pk)
+    except ClassNews.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = NewsSerializer(news)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = NewsSerializer(news, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+    elif request.method == 'DELETE':
+        news.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

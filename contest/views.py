@@ -48,3 +48,30 @@ def add_contest(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def contest_detail(request, pk):
+    try:
+        contests = ClassContest.objects.get(pk=pk)
+    except ClassContest.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ContestSerializer(contests)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ContestSerializer(contests, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        contests.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

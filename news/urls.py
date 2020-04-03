@@ -15,10 +15,8 @@ urlpatterns = [
     path('all/', get_all_news),
     path('add/', add_news),
     path('image/all/', get_all_image),
-    # path('contest/all/', get_all_contest),
-    # path('contest/get/', get_contest),
-    # path('get_file/', get_file),
+    path('news_detail/', news_detail),
+    path('news_detail/<int:pk>', news_detail),
 ]
-# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += router.urls
 

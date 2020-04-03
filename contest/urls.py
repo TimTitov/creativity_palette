@@ -12,16 +12,12 @@ router.register('api/file', FileAPI, 'file')
 router.register('api/contest', ContestAPI, 'contest')
 
 urlpatterns = [
-
-    path('contest/all/', get_all_contest),
-    path('contest/get/', get_contest),
-    path('contest/add/', add_contest),
+    path('all/', get_all_contest),
+    path('get/', get_contest),
+    path('add/', add_contest),
     path('get_file/', get_file),
-
-
-   # path('image/add/', add_image),x
-
-] \
-              #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('contest_detail/', contest_detail),
+    path('contest_detail/<int:pk>', contest_detail),
+]
 urlpatterns += router.urls
 
