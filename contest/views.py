@@ -51,7 +51,7 @@ def add_contest(request):
 
 
 @api_view(['POST'])
-def file_add(request, pk):
+def file_add(request):
     if request.method == 'POST':
         try:
             serializer = FileSerializer(data=request.data)
