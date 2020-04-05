@@ -16,6 +16,8 @@ urlpatterns = [
     path('get/', get_contest),
     path('add/', add_contest),
     path('get_file/', get_file),
+    path('add_file/', file_add),
+    path('delete_file/<int:pk>', file_delete),
     path('contest_detail/', contest_detail),
     path('contest_detail/<int:pk>', contest_detail),
 ]

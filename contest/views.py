@@ -41,7 +41,21 @@ def add_contest(request):
     if request.method == 'POST':
         try:
             serializer = ContestSerializer(data=request.data)
-        except ClassContest.BadRequest:
+        except ContestSerializer.BadRequest:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def file_add(request, pk):
+    if request.method == 'POST':
+        try:
+            serializer = FileSerializer(data=request.data)
+        except FileSerializer.BadRequest:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         if serializer.is_valid():
             serializer.save()
@@ -51,7 +65,16 @@ def add_contest(request):
 
 
 
+@api_view(['DELETE'])
+def file_delete(request, pk):
+    try:
+        file = ClassFile.objects.get(pk=pk)
+    except ClassFile.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
+    if request.method == 'DELETE':
+        file.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
