@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'contest',
     'news',
     'rest_framework',
+    'administrator'
 ]
 
 MIDDLEWARE = [
